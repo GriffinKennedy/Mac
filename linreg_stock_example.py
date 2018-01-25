@@ -31,13 +31,15 @@ df['PCT_change'] = (df['Adj. Close'] - df["Adj. Open"]) / df["Adj. Open"] * 100.
 # =============================================================================
 # This is what we dubbed of value
 # =============================================================================
+
+#           PRICE         X         X              X
 df = df[['Adj. Close','HL_PCT','PCT_change','Adj. Volume']]
 #print(df.head())
 
 forcast_col = "Adj. Close"
 df.fillna(-99999, inplace=True) #we are replacing our na's with outlier data this is a good option for ML
 
-forecast_out = int(math.ceil(0.01*len(df)))
+forecast_out = int(math.ceil(0.1*len(df)))
 print(forecast_out)
 
 df['label'] = df[forcast_col].shift(-forecast_out)
